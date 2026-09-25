@@ -1,33 +1,41 @@
 import csv
 
-input_file = "Input.log"
-output_file = "Output.csv"
+input_file_transfer_5v = "transfer_5v.log"
+input_file_transfer_p1v = "transfer_0p1v.log"
+input_file_output_lowv = "output_lowv.log"
+output_file_transfer_5v = "transfer_5v.csv"
+output_file_transfer_0pv = "transfer_0pv.csv"
+output_file_output_lowv = "output_lowv.csv"
 
-with open(input_file, "r") as infile, open(
-    output_file, "w", newline=""
-) as outfile:
+input_file_array = [input_file_transfer_5v, input_file_transfer_p1v, input_file_output_lowv]
+output_file_array = [output_file_transfer_5v, output_file_transfer_0pv,output_file_output_lowv]
 
-    writer = csv.writer(outfile)
+for i in range(0, len(input_file_array)):
+    with open(input_file_array[i], "r") as infile, open(
+        output_file_array[i], "w", newline=""
+    ) as outfile:
 
-    # Headers
-    writer.writerow([
-        "Source Voltage",
-        "Source Int Voltage",
-        "Source Current",
-        "Drain Voltage",
-        "Drain Int Voltage",
-        "Drain Current",
-        "Gate Voltage",
-        "Gate Int Voltage",
-        "Gate Current",
-    ])
+        writer = csv.writer(outfile)
 
-    for line in infile:
-        line = line.strip()
+        # Headers
+        writer.writerow([
+            "Source Voltage",
+            "Source Int Voltage",
+            "Source Current",
+            "Drain Voltage",
+            "Drain Int Voltage",
+            "Drain Current",
+            "Gate Voltage",
+            "Gate Int Voltage",
+            "Gate Current",
+        ])
 
-        # Only process Silvaco data lines
-        if line.startswith("d "):
-            values = line.split()[1:]
-            writer.writerow(values)
+        for line in infile:
+            line = line.strip()
 
-print(f"Conversion complete: {output_file}")
+            # Only process Silvaco data lines
+            if line.startswith("d "):
+                values = line.split()[1:]
+                writer.writerow(values)
+
+    print(f"Conversion complete: {output_file_array[i]}")
