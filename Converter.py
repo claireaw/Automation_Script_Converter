@@ -1,11 +1,11 @@
 import csv
 
-input_file_transfer_5v = "transfer_5v.log"
-input_file_transfer_p1v = "transfer_0p1v.log"
-input_file_output_lowv = "output_lowv.log"
-output_file_transfer_5v = "transfer_5v.csv"
-output_file_transfer_0pv = "transfer_0pv.csv"
-output_file_output_lowv = "output_lowv.csv"
+input_file_transfer_5v = "Inputs/transfer_5v.log"
+input_file_transfer_p1v = "Inputs/transfer_0p1v.log"
+input_file_output_lowv = "Inputs/output_lowv.log"
+output_file_transfer_5v = "Outputs/transfer_5v.csv"
+output_file_transfer_0pv = "Outputs/transfer_0pv.csv"
+output_file_output_lowv = "Outputs/output_lowv.csv"
 
 input_file_array = [input_file_transfer_5v, input_file_transfer_p1v, input_file_output_lowv]
 output_file_array = [output_file_transfer_5v, output_file_transfer_0pv,output_file_output_lowv]
@@ -39,3 +39,6 @@ for i in range(0, len(input_file_array)):
                 writer.writerow(values)
 
     print(f"Conversion complete: {output_file_array[i]}")
+
+    with open(output_file_array[i], "r") as outfile:
+        reader = csv.reader(outfile)
