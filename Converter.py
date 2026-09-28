@@ -1,4 +1,8 @@
 import csv
+import pandas as pd
+
+cutoff = 0
+j=0
 
 input_file_transfer_5v = "Inputs/transfer_5v.log"
 input_file_transfer_p1v = "Inputs/transfer_0p1v.log"
@@ -42,3 +46,15 @@ for i in range(0, len(input_file_array)):
 
     with open(output_file_array[i], "r") as outfile:
         reader = csv.reader(outfile)
+
+df = pd.read_csv('Outputs/transfer_0pv.csv')
+
+for value in df['Drain Current']:
+    #semi arbitrary value
+    if value <= 1E-15:
+        cutoff = df.iat[j, 6]
+        break
+    #elif value < cutoff:
+     #   cutoff = value
+    j +=1
+print(f"Cutoff voltage: {cutoff}")
