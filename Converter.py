@@ -1,4 +1,5 @@
 import csv
+import math
 import pandas as pd
 
 def cutoff():
@@ -59,16 +60,27 @@ def conversion():
         with open(output_file_array[i], "r") as outfile:
             reader = csv.reader(outfile)
 
-def Ron():
+def ron(radius):
     df = pd.read_csv('Outputs/output_lowv.csv')
     smallV = df.iat[12, 5]
-    print(smallV)
-    Ron =
+    Ron = (smallV/0.1)**-1
+    print(f"Ron voltage: {Ron}")
+    Ronsp = Ron*math.pi*(radius**2)
+    print(f"Ron,sp voltage: {Ronsp}")
+
+def modratio():
+    df = pd.read_csv('Outputs/transfer_5v.csv')
+    low = df.iat[0, 5]
+    high = df.iat[22, 5]
+    modratio = low/high
+    print(f"Mod ratio voltage: {modratio}")
 
 def main():
+    radius = int(input("Radius of channel: "))
     conversion()
     cutoff()
-    Ron()
+    ron(radius)
+    modratio()
 
 if __name__ == "__main__":
     main()
