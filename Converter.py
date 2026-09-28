@@ -83,8 +83,8 @@ def maxIG():
     print(f"Max |IG|: {max_ig:.3e} A")
     return max_ig
 
-def leakage(max):
-    leakage = max_ig
+#def leakage(max_ig, idss):
+    leakage = max_ig/(idss*0.001)
 
 def main():
     radius = int(input("Radius of channel: "))
@@ -92,8 +92,8 @@ def main():
     cutoff()
     ron(radius)
     modratio()
-    maxIG()
-    leakage(max_ig)
+    max_ig = maxIG()
+    #leakage(max_ig)
 
 if __name__ == "__main__":
     main()
