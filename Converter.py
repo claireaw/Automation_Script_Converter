@@ -54,7 +54,7 @@ for value in df['Drain Current']:
     if value <= 1E-15:
         cutoff = df.iat[j, 6]
         break
-    #elif value < cutoff:
-     #   cutoff = value
+    else:
+        cutoff = None
     j +=1
 print(f"Cutoff voltage: {cutoff}")
