@@ -75,12 +75,25 @@ def modratio():
     modratio = low/high
     print(f"Mod ratio voltage: {modratio}")
 
+#dc
+def maxIG():
+    df = pd.read_csv("Outputs/transfer_5v.csv")
+    mask = (df["Gate Voltage"] >= -10) & (df["Gate Voltage"] <= 0)
+    max_ig = df.loc[mask, "Gate Current"].abs().max()
+    print(f"Max |IG|: {max_ig:.3e} A")
+    return max_ig
+
+def leakage(max):
+    leakage = max_ig
+
 def main():
     radius = int(input("Radius of channel: "))
     conversion()
     cutoff()
     ron(radius)
     modratio()
+    maxIG()
+    leakage(max_ig)
 
 if __name__ == "__main__":
     main()
