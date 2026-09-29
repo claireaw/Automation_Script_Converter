@@ -1,10 +1,11 @@
 import csv
 import math
 import pandas as pd
+import sys
 
 def cutoff():
-    cutoff = 0
     j = 0
+    #attempt to find
     df = pd.read_csv('Outputs/transfer_0pv.csv')
     for value in df['Drain Current']:
         #semi-arbitrary value
@@ -13,6 +14,8 @@ def cutoff():
             break
         else:
             cutoff = None
+            print("There is not presented cutoff voltage")
+            sys.exit("No cutoff voltage")
         j +=1
     print(f"Cutoff voltage: {cutoff}")
 
