@@ -85,19 +85,23 @@ def maxIG():
     print(f"Max |IG|: {max_ig:.3e} A")
     return max_ig
 
-def leakage(max_ig, idss):
-    leakage = max_ig/(idss*0.001)
+def leakage(max_ig):
+    df = pd.read_csv("Outputs/output_highv.csv")
+    #adjust and round for point at 90% of column length
+    column_length = len(df['Drain Voltage'])
+    column_length_point = round(column_length*.9)
+    idss = df.at[column_length_point, 'Drain Current']
+    leakage = max_ig/(idss)
     print(f"Leakage voltage: {leakage}")
 
 def main():
     radius = int(input("Radius of channel (nm): "))
-    idss = float(input("IDSS (mA): "))
     conversion()
     cutoff()
     ron(radius)
     modratio()
     max_ig = maxIG()
-    leakage(max_ig, idss)
+    leakage(max_ig)
 
 if __name__ == "__main__":
     main()
