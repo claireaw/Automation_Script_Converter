@@ -71,7 +71,7 @@ def ron(radius):
     smallV = df.iat[len(df['Drain Current'])-1, 5]
     Ron = (smallV/0.1)**-1
     print(f"Ron voltage: {Ron}")
-    Ronsp = Ron*math.pi*(radius**2)
+    Ronsp = Ron*math.pi*((radius*1e-7)**2)
     print(f"Ron,sp voltage: {Ronsp}")
 
 def modratio():
