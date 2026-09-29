@@ -68,7 +68,7 @@ def cutoff():
 
 def ron(radius):
     df = pd.read_csv('Outputs/output_lowv.csv')
-    smallV = df.iat[12, 5]
+    smallV = df.iat[len(df['Drain Current'])-1, 5]
     Ron = (smallV/0.1)**-1
     print(f"Ron voltage: {Ron}")
     Ronsp = Ron*math.pi*(radius**2)
