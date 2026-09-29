@@ -3,22 +3,6 @@ import math
 import pandas as pd
 import sys
 
-def cutoff():
-    j = 0
-    #attempt to find
-    df = pd.read_csv('Outputs/transfer_0pv.csv')
-    for value in df['Drain Current']:
-        #semi-arbitrary value
-        if value <= 1E-15:
-            cutoff = df.iat[j, 6]
-            break
-        else:
-            cutoff = None
-            print("There is not presented cutoff voltage")
-            sys.exit("No cutoff voltage")
-        j +=1
-    print(f"Cutoff voltage: {cutoff}")
-
 def conversion():
     input_file_transfer_5v = "Inputs/transfer_5v.log"
     input_file_transfer_p1v = "Inputs/transfer_0p1v.log"
@@ -64,6 +48,23 @@ def conversion():
 
         with open(output_file_array[i], "r") as outfile:
             reader = csv.reader(outfile)
+
+def cutoff():
+    j = 0
+    #attempt to find
+    df = pd.read_csv('Outputs/transfer_0pv.csv')
+    for value in df['Drain Current']:
+        #semi-arbitrary value
+        if value <= 1E-15:
+            cutoff = df.iat[j, 6]
+            break
+        else:
+            cutoff = None
+        j +=1
+    if cutoff is None:
+        print("No cutoff voltage found")
+        sys.exit("No cutoff voltage found")
+    print(f"Cutoff voltage: {cutoff}")
 
 def ron(radius):
     df = pd.read_csv('Outputs/output_lowv.csv')
