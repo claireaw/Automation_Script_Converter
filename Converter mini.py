@@ -6,15 +6,13 @@ import sys
 def conversion():
     input_file_transfer_5v = "Inputs/transfer_5v.log"
     input_file_transfer_p1v = "Inputs/transfer_0p1v.log"
-    input_file_output_highv = "Inputs/output_highv.log"
     input_file_output_lowv = "Inputs/output_lowv.log"
     output_file_transfer_5v = "Outputs/transfer_5v.csv"
     output_file_transfer_0pv = "Outputs/transfer_0pv.csv"
-    output_file_output_highv = "Outputs/output_highv.csv"
     output_file_output_lowv = "Outputs/output_lowv.csv"
 
-    input_file_array = [input_file_transfer_5v, input_file_transfer_p1v, input_file_output_lowv, input_file_output_highv]
-    output_file_array = [output_file_transfer_5v, output_file_transfer_0pv,output_file_output_lowv,output_file_output_highv]
+    input_file_array = [input_file_transfer_5v, input_file_transfer_p1v, input_file_output_lowv]
+    output_file_array = [output_file_transfer_5v, output_file_transfer_0pv,output_file_output_lowv]
 
     for i in range(0, len(input_file_array)):
         with open(input_file_array[i], "r") as infile, open(
@@ -89,7 +87,7 @@ def maxIG():
     print(f"Max |IG|: {max_ig:.3e} A")
     return max_ig
 
-def leakage(max_ig):
+#def leakage(max_ig):
     df = pd.read_csv("Outputs/output_highv.csv")
     #adjust and round for point at 90% of column length
     column_length = len(df['Drain Voltage'])
@@ -105,7 +103,7 @@ def main():
     ron(radius)
     modratio()
     max_ig = maxIG()
-    leakage(max_ig)
+    #leakage(max_ig)
 
 if __name__ == "__main__":
     main()
