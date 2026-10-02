@@ -91,17 +91,19 @@ def leakage(max_ig, idss):
     leakage = max_ig/(idss)
     print(f"Leakage voltage: {leakage}")
 
-def idss():
+def idss(radius):
     df = pd.read_csv('Outputs/transfer_5v.csv')
     idss = df.iloc[1, 5]
     print(f"IDss: {idss*1e3}")
+    jdss = idss/(math.pi*((radius*1e-7)**2))
+    print(f"JDSs: {jdss}")
     return idss
 
 def main():
     radius = int(input("Radius of channel (nm): "))
     conversion()
     cutoff()
-    idss1 = idss()
+    idss1 = idss(radius)
     ron(radius)
     modratio()
     max_ig = maxIG()
