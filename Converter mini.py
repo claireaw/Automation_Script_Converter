@@ -76,7 +76,7 @@ def modratio():
     df = pd.read_csv('Outputs/transfer_5v.csv')
     low = df.iat[0, 5]
     high = df.iat[22, 5]
-    modratio = low/high
+    modratio = abs(low)/abs(high)
     print(f"Mod ratio voltage: {modratio}")
 
 def maxIG():
