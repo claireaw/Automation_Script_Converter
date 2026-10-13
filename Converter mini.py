@@ -75,7 +75,7 @@ def ron(radius):
 def modratio():
     df = pd.read_csv('Outputs/transfer_5v.csv')
     low = df.iat[0, 5]
-    high = df.iat[22, 5]
+    high = df.loc[df['Gate Voltage'] == -10, 'Drain Current'].values[0]
     modratio = abs(low)/abs(high)
     print(f"Mod ratio voltage: {modratio}")
 
