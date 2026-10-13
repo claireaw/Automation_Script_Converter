@@ -92,7 +92,7 @@ def leakage(max_ig, idss):
 
 def idss(radius):
     df = pd.read_csv('Outputs/transfer_5v.csv')
-    idss = df.iloc[1, 5]
+    idss = df.iloc[0, 5]
     print(f"IDss: {idss*1e3}")
     jdss = idss/(math.pi*((radius*1e-7)**2))
     print(f"JDSs: {jdss}")
